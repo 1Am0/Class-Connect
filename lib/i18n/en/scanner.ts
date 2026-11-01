@@ -1,0 +1,103 @@
+import type { Namespace } from "../translate";
+
+// The Scanner page: connection, where scans go, practice taps and settings.
+export default {
+  assigning:
+    "<b>{name} is assigning tags.</b> Finish here when you’re ready to take attendance again.",
+  resume: "Resume attendance",
+  practice: "Try a practice tap",
+  practiceIntro:
+    "See how a tap works without a scanner. This marks attendance in your current class.",
+  scanner: "Scanner",
+  practiceScanner: "Practice scanner",
+  student: "Student",
+  practiceStudent: "Practice student",
+  chooseStudent: "Choose a student",
+  unassignedTag: "Unassigned tag",
+  customTag: "Custom tag number",
+  tapFailed: "The tap could not be saved. Check your connection and try again.",
+  checkingIn: "Checking in…",
+  tryTap: "Try this tap",
+  testTag: "Test a specific tag number",
+  tagNumber: "Tag number (UID)",
+  tagPlaceholder: "For example, 04A7318C",
+  settings: "Scanner settings",
+  settingsIntro:
+    "Your scanner works with every class. These settings are usually only needed during setup.",
+  lastConnected: "Last connected {time}",
+  notConnectedYet: "Not connected yet",
+  enabled: "Enabled",
+  demoScanner:
+    "A scanner is already set up for this demo. Connect it above to try real tags.",
+  added: "Scanner added. You can connect it with Bluetooth now.",
+  scannerName: "Scanner name",
+  scannerNamePlaceholder: "My classroom scanner",
+  adding: "Adding…",
+  add: "Add scanner",
+  cancel: "Cancel",
+  addAnother: "Add another scanner",
+  wifiToken: "Optional Wi-Fi setup token",
+  wifiIntro:
+    "Bluetooth is ready without this token. For a scanner that connects directly over Wi-Fi, save these values in its secrets.h file. The token is shown only during this visit.",
+  deviceIdentifier: "Device identifier",
+  secretToken: "Secret token",
+  dismissToken: "Dismiss token",
+  technical: "Technical details",
+  readyForClass: "Scanner ready for this class.",
+  titlePaused: "Scanner is paused",
+  titleAssigning: "Assigning a student’s tag",
+  titleConnected: "Scanner connected",
+  titleChoose: "Choose your scanner",
+  titleConnect: "Connect your scanner",
+  connection: "Scanner connection",
+  scannerToConnect: "Scanner to connect",
+  setUp: "Set up scanner",
+  connected: "Connected",
+  updating: "Updating…",
+  useScanner: "Use scanner",
+  connecting: "Connecting…",
+  connect: "Connect scanner",
+  useChrome: "Use Chrome or Edge for Bluetooth.",
+  bodyPaused: "Enable this scanner in Scanner settings before students tap.",
+  bodyAssigning:
+    "Finish assigning the tag in Students before taking attendance.",
+  bodyConnected: "Students can tap their tags to check in.",
+  bodyChoose: "Select Classroom in the Bluetooth window, then choose Pair.",
+  bodyConnect: "Turn on the scanner, then connect it to this laptop.",
+  openInChrome:
+    "Open this page in Chrome or Edge to connect your scanner. You can still take attendance by hand here.",
+  setUpA: "Set up a scanner",
+  addOrEnable: "Add or enable a scanner in Scanner settings below.",
+  openAttendance: "Open class attendance",
+  waitingSignal: "Waiting for the scanner’s first signal…",
+  noSignal: "No recent signal. Keep the scanner powered on and nearby.",
+  keepOpen:
+    "Keep this tab open and the laptop awake. You can move between pages.",
+  connectionDetails: "Connection details",
+  needHelp: "Need help connecting?",
+  lastTag: "Last tag number: <code>{uid}</code>",
+  disconnect: "Disconnect scanner",
+  firmware:
+    "The scanner needs the <b>ClassroomBluetooth</b> program installed first. Choose the device named <b>Classroom-…</b> when connecting.",
+  wifiNote:
+    "The laptop uses your school’s Wi-Fi; the scanner does not need to join it.",
+  browserNote:
+    "Bluetooth works in desktop Chrome or Edge on this laptop’s local address or a secure HTTPS website. The laptop uses your school’s Wi-Fi; the scanner does not need to join it.",
+  destinationUpdated: "Scanner destination updated.",
+  routingFailed: "Could not change scanner routing. Try again.",
+  routing: "Scanner routing",
+  scansGo: "Scans go to Period {number} · {name}",
+  noClassNow: "No class is receiving scans right now",
+  manualHint:
+    "Manual destination · stays selected until you choose Follow class schedule.",
+  autoHint: "Automatic routing · follows your saved school schedule.",
+  mismatch:
+    "Scans update another class. Viewing this roster does not change their destination.",
+  noActive:
+    "Your schedule has no active class right now. Choose a destination to receive scans.",
+  sendHere: "Send scans to this class",
+  follow: "Follow class schedule",
+  destination: "Attendance destination",
+  classOption: "Period {number} · {name}",
+  setUpClass: "Set up a class",
+} satisfies Namespace;

@@ -1,0 +1,37 @@
+import type { Namespace } from "../translate";
+
+// Pick a student (the wheel) and Make groups.
+export default {
+  resetDone: "Selection reset. All present students can be picked again.",
+  notPresent: "That student is no longer present. Pick again.",
+  picker: "Student picker",
+  left: "{left} of {total} left",
+  reset: "Reset",
+  needPresent: "Mark students present in a class to use the wheel.",
+  allPicked: "Everyone has been picked. Choose Reset to start again.",
+  spin: "Spin the student wheel",
+  picking: "Picking…",
+  pick: "Pick a student",
+  selected: "Selected student",
+  close: "Close",
+  groupSettings: "Group settings",
+  groupBy: "Group by",
+  groupMethod: "Grouping method",
+  byCount: "Number of groups",
+  bySize: "Students per group",
+  groups: "Groups",
+  quantity: "Group quantity",
+  wholeNumber: "Enter a whole number from 1 to 100.",
+  shuffleAgain: "Shuffle again",
+  makeGroups: "Make groups",
+  stale: "Attendance changed. Choose “Shuffle again” to update the groups.",
+  groupCount: { one: "1 group", other: "{count} groups" },
+  copyHeading: "GROUP {number}",
+  copy: "Copy groups",
+  print: "Print",
+  group: "Group {number}",
+  members: { one: "1 student", other: "{count} students" },
+  nobody: "No students are present yet",
+  nobodyBody:
+    "Mark students present in a class, then come back to make groups.",
+} satisfies Namespace;

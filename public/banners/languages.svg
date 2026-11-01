@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" preserveAspectRatio="xMaxYMid slice">
+<g fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+
+<circle cx="900" cy="40" r="120" fill="#ffffff" fill-opacity="0.08" stroke="none"/>
+<path d="M610 70h190a24 24 0 0 1 24 24v62a24 24 0 0 1-24 24h-120l-36 30v-30h-34a24 24 0 0 1-24-24V94a24 24 0 0 1 24-24z" fill="#ffffff" fill-opacity="0.16" stroke="none"/>
+<text x="705" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff" stroke="none">¡Hola!</text>
+<path d="M800 120h120a20 20 0 0 1 20 20v46a20 20 0 0 1-20 20h-20v26l-30-26h-70a20 20 0 0 1-20-20v-46a20 20 0 0 1 20-20z" stroke-opacity="0.55"/>
+<path d="M830 156h60M830 178h36" stroke-opacity="0.55"/>
+</g>
+</svg>

@@ -1,0 +1,45 @@
+import type en from "../en/games";
+import type { Translation } from "../translate";
+
+export default {
+  chooseSetBody:
+    "Crea o elige un conjunto en Conjuntos de actividades para empezar.",
+  chooseConversation: "Elige un conjunto de temas de conversación",
+  conversation: "Temas de conversación",
+  conversationProgress: "Temas de conversación · {index} de {total}",
+  restart: "Reiniciar",
+  starter: "Para empezar: {text}",
+  followUp: "Pregunta de seguimiento: {text}",
+  hideNotes: "Ocultar notas",
+  showNotes: "Mostrar notas",
+  startAgain: "Empezar de nuevo",
+  nextQuestion: "Siguiente pregunta",
+  chooseScramble: "Elige un conjunto de oraciones para ordenar",
+  scramble: "Ordenar oraciones",
+  scrambleProgress: "Ordenar oraciones · {index} de {total}",
+  reshuffle: "Mezclar",
+  scrambleInstruction: "Elige las palabras en el orden correcto.",
+  availableWords: "Palabras disponibles",
+  yourSentence: "Tu oración",
+  sentenceHere: "Tu oración aparece aquí.",
+  correct: "¡Correcto!",
+  incorrect:
+    "Ese orden no coincide con la oración guardada. Inténtalo de nuevo.",
+  resetWords: "Reiniciar palabras",
+  check: "Comprobar respuesta",
+  nextSentence: "Siguiente oración",
+  chooseVocabulary: "Elige un conjunto de vocabulario",
+  matched: "¡Pareja encontrada! La línea de color une la pareja.",
+  noMatch: "Esa pareja no coincide. Prueba otra opción.",
+  chooseMeaning: "Elige su significado.",
+  chooseWord: "Elige su palabra.",
+  matching: "Emparejar vocabulario",
+  matchingProgress: "Emparejar vocabulario · {matched} de {total} emparejadas",
+  reset: "Reiniciar",
+  matchingInstruction:
+    "Elige una palabra o un significado y luego únelo con su pareja.",
+  words: "Palabras",
+  meanings: "Significados",
+  nextWords: "Siguientes palabras",
+  playAgain: "Jugar de nuevo",
+} satisfies Translation<typeof en>;

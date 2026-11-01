@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" preserveAspectRatio="xMaxYMid slice">
+<g fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+
+<circle cx="910" cy="60" r="110" fill="#ffffff" fill-opacity="0.08" stroke="none"/>
+<path d="M680 40v70l-55 100a14 14 0 0 0 12 20h130a14 14 0 0 0 12-20l-55-100V40" stroke-opacity="0.8"/>
+<path d="M640 180h120l18 32a8 8 0 0 1-7 12H630a8 8 0 0 1-7-12z" fill="#ffffff" fill-opacity="0.25" stroke="none"/>
+<path d="M665 40h70" stroke-opacity="0.8"/>
+<ellipse cx="880" cy="140" rx="80" ry="30" stroke-opacity="0.6"/>
+<ellipse cx="880" cy="140" rx="80" ry="30" transform="rotate(60 880 140)" stroke-opacity="0.6"/>
+<ellipse cx="880" cy="140" rx="80" ry="30" transform="rotate(-60 880 140)" stroke-opacity="0.6"/>
+<circle cx="880" cy="140" r="10" fill="#ffffff" fill-opacity="0.9" stroke="none"/>
+</g>
+</svg>

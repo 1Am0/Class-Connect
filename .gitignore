@@ -1,0 +1,16 @@
+node_modules/
+.pnpm-store/
+.hardware/
+.next/
+.env*
+!.env.example
+.demo/
+*.tsbuildinfo
+esp32/**/secrets.h
+
+# Local design-tool output (contains machine paths)
+.impeccable/
+
+# AI coding-agent files (next dev writes these when an agent runs it)
+AGENTS.md
+CLAUDE.md

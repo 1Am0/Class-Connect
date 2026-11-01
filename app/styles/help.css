@@ -1,0 +1,461 @@
+/* Help Center slide-over (token-mapped from the previous design). */
+.help-center-dialog :is(button, a, input):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+html:has(dialog.help-center-dialog[open]),
+body:has(dialog.help-center-dialog[open]) {
+  overflow: hidden;
+}
+dialog.help-center-dialog {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(440px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-dialog) 0 0 var(--radius-dialog);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-dialog);
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+dialog.help-center-dialog[data-phase="entered"] {
+  transform: translateX(0);
+}
+dialog.help-center-dialog:not([open]) {
+  display: none;
+}
+.help-center-dialog::backdrop {
+  background: transparent;
+  transition: background-color 260ms ease;
+}
+.help-center-dialog[data-phase="entered"]::backdrop {
+  background: var(--scrim);
+}
+.help-center-shell {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  height: 100%;
+}
+.help-center-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+}
+.help-center-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.help-center-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-control);
+  background: var(--accent-tint);
+  color: var(--ink);
+}
+.help-center-header h2 {
+  margin: 1px 0 var(--space-1);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--title-section);
+  line-height: 1.15;
+}
+.help-center-header p {
+  max-width: 31ch;
+  margin: 0;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.help-center-header .help-close {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  color: var(--ink);
+}
+.help-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  margin: 0 var(--space-5) var(--space-4);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+  color: var(--ink-2);
+}
+.help-search-wrap:focus-within {
+  border-color: var(--accent);
+}
+.help-search-wrap input {
+  flex: 1;
+  min-width: 0;
+  height: calc(var(--control-height) - 4px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+}
+.help-center-dialog .help-search-wrap input:focus-visible {
+  outline: none;
+}
+.help-search-wrap input::placeholder {
+  color: var(--ink-2);
+}
+.help-clear {
+  flex: none;
+  padding: var(--space-2);
+  border: 0;
+  background: transparent;
+  color: var(--accent-text);
+  font: inherit;
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+}
+.help-center-body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 var(--space-5) var(--space-6);
+  scrollbar-color: var(--rule) transparent;
+}
+.help-home,
+.help-list,
+.help-categories,
+.help-article,
+.help-related {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+}
+.help-home {
+  gap: var(--space-4);
+}
+.help-list h3,
+.help-categories h3,
+.help-support h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-1);
+  color: var(--accent-text);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+.help-list h3 span {
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+}
+.help-article-link,
+.help-categories button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 56px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.help-article-link:hover,
+.help-categories button:hover {
+  background: var(--wash);
+}
+.help-article-link--compact {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+}
+.help-article-link > span,
+.help-categories button > span {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+.help-article-link strong {
+  color: var(--ink);
+  font-weight: var(--weight-bold);
+}
+.help-article-link small,
+.help-categories small {
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+  line-height: 1.35;
+}
+.help-article-link > svg:last-child,
+.help-categories button > svg:last-child {
+  flex: none;
+  color: var(--accent-text);
+}
+.help-categories > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.help-categories button {
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 72px;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+.help-categories button > span {
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  line-height: 1.25;
+}
+/* Each topic's icon sits on a disc of its own color. */
+.help-categories button > .help-topic-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--topic) 14%, var(--surface));
+  color: color-mix(in srgb, var(--topic) 85%, var(--ink));
+}
+.help-categories button:hover .help-topic-icon {
+  background: var(--topic);
+  color: var(--on-color);
+}
+.help-view-all {
+  justify-self: start;
+  min-height: 44px;
+  padding: var(--space-2) 2px;
+  border: 0;
+  background: transparent;
+  color: var(--accent-text);
+  font: inherit;
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+}
+.help-categories button > svg:first-child {
+  flex: none;
+  color: var(--accent-text);
+}
+.help-categories button > span {
+  flex: 1;
+  font-weight: var(--weight-bold);
+}
+.help-empty {
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-control);
+  background: var(--wash);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.help-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  min-height: var(--control-height-compact);
+  padding: var(--space-1) 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-text);
+  font: inherit;
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+}
+.help-breadcrumb {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+}
+.help-article {
+  gap: var(--space-3);
+}
+.help-article h3 {
+  margin: 0;
+  color: var(--accent-text);
+  font-family: var(--font-display);
+  font-size: var(--title-section);
+  line-height: 1.2;
+}
+.help-article-description {
+  margin: 0 0 var(--space-2);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.help-article h4 {
+  margin: var(--space-2) 0 0;
+  color: var(--ink);
+  font-size: var(--text-base);
+}
+.help-article ol {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding-left: var(--space-5);
+  line-height: 1.55;
+}
+.help-article li {
+  padding-left: var(--space-1);
+}
+.help-article li::marker {
+  color: var(--accent-text);
+  font-weight: var(--weight-bold);
+}
+.help-tip {
+  margin: var(--space-1) 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--wash);
+  line-height: 1.5;
+}
+.help-tip strong {
+  color: var(--accent-text);
+}
+.help-destination {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  justify-self: start;
+  min-height: var(--control-height);
+  margin-top: var(--space-1);
+  text-decoration: none;
+}
+.help-related {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+.help-related h4 {
+  margin: 0;
+}
+.help-feedback,
+.help-support {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+.help-feedback {
+  margin-top: var(--space-3);
+}
+.help-feedback h4,
+.help-support h3 {
+  margin: 0;
+}
+.help-feedback p,
+.help-support p {
+  margin: 0;
+  line-height: 1.45;
+}
+.help-feedback small,
+.help-support small {
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+.help-feedback-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+.help-feedback-actions button,
+.help-support > button,
+.help-support-form > button,
+.help-feedback-note > button {
+  min-height: 44px;
+}
+.help-feedback-note,
+.help-support-form {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+}
+.help-feedback-note label,
+.help-support-form label {
+  font-weight: var(--weight-bold);
+}
+.help-feedback-note textarea,
+.help-support-form textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+  color: var(--ink);
+  font: inherit;
+  resize: vertical;
+}
+.help-article-image {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-1) 0;
+}
+.help-article-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+.help-article-image figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2);
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+}
+.help-article-image a {
+  color: var(--accent-text);
+}
+@media (max-width: 600px) {
+  dialog.help-center-dialog {
+    width: 100vw;
+    border-radius: 0;
+  }
+  .help-center-header {
+    padding: var(--space-4) var(--space-4) var(--space-4);
+  }
+  .help-search-wrap {
+    margin: 0 var(--space-4) var(--space-4);
+  }
+  .help-center-body {
+    padding: 0 var(--space-4) var(--space-6);
+  }
+}
+@media (max-width: 360px) {
+  .help-categories > div {
+    grid-template-columns: 1fr;
+  }
+  .help-categories button {
+    min-height: 52px;
+    align-items: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.help-center-dialog,
+  .help-center-dialog::backdrop {
+    transition-duration: 0.01ms;
+  }
+}

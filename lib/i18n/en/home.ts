@@ -1,0 +1,51 @@
+import type { Namespace } from "../translate";
+
+// Home (today's class cards) and Manage classes.
+export default {
+  timingNow: "In session",
+  timingNext: "Up next",
+  timingLater: "Later today",
+  timingDone: "Finished",
+  timingOff: "Not meeting today",
+  doesNotMeetToday: "Does not meet today",
+  noClassToday: "No class today",
+  tooManyClasses: "You can have up to 20 classes.",
+  restored: "{name} restored to your active classes.",
+  archivedScannerReset: "{name} archived. Scanner now follows the schedule.",
+  archived: "{name} archived. Attendance history is still available.",
+  updateFailed: "Could not update this class.",
+  manageClasses: "Manage classes",
+  today: "Today",
+  addClass: "Add class",
+  activeClasses: "Active classes",
+  className: "Period {number} · {name}",
+  openClass: "Open class",
+  archiveEllipsis: "Archive…",
+  noActiveClasses: "No active classes",
+  noActiveClassesBody:
+    "Add a class to start taking attendance, or restore one from the archive below.",
+  archivedClasses: "Archived classes",
+  archivedClassesBody:
+    "Past attendance stays available after a class is archived.",
+  viewHistory: "View history",
+  restore: "Restore",
+  noArchived: "No archived classes yet.",
+  yourClassesToday: "Your classes today",
+  openClassLabel: "Open {name}. {timing}. {here} of {total} here today.",
+  hereToday: " / {total} here today",
+  scannerHere: "Scanner check-ins go here",
+  takeAttendance: "Take attendance",
+  takeAttendanceFor: "Take attendance for {name}",
+  attendanceHistory: "Attendance history",
+  attendanceHistoryFor: "Attendance history for {name}",
+  firstClass: "Add your first class",
+  firstClassBody: "Set its name and meeting time to start taking attendance.",
+  archiveTitle: "Archive this class?",
+  archiveBody:
+    "<b>{name}</b> will leave your active classes. Its students and attendance history will stay saved, and you can restore it later.",
+  archiveScanner:
+    "The scanner is currently set to this class. Archiving it will switch the scanner back to the school schedule.",
+  keepClass: "Keep class",
+  archiving: "Archiving…",
+  archiveClass: "Archive class",
+} satisfies Namespace;

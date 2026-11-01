@@ -1,0 +1,68 @@
+import type en from "../en/schedule";
+import type { Translation } from "../translate";
+
+export default {
+  weeklyTitle: "Horario escolar semanal",
+  weeklyIntro: "Elige qué horario de timbres se usa cada día de clases.",
+  assignments: "Horario de cada día",
+  daySchedule: "Horario del {day}",
+  noSchedule: "Sin horario",
+  noScheduleHint:
+    "Un día sin horario pausa el destino automático del escáner. Puedes elegir la clase del escáner manualmente.",
+  scheduleToEdit: "Horario para editar",
+  newSchedule: "Nuevo horario",
+  copyName: "{name} (copia)",
+  duplicate: "Duplicar",
+  scheduleName: "Nombre del horario",
+  deleteSchedule: "Eliminar horario",
+  usedOn: "Se usa el {days}. Al editar este horario cambian todos esos días.",
+  notAssigned: "Todavía no está asignado a ningún día.",
+  periodForTime: "Período del horario {index}",
+  overlapNote:
+    "{warnings} El destino automático del escáner elige el número de período más bajo.",
+  createFirst:
+    "Crea un horario, agrega los horarios de sus períodos y asígnalo a días de la semana.",
+  previewDay: "Ver día",
+  saveWeekly: "Guardar horario semanal",
+  weeklySaved: "Horario semanal guardado.",
+  weeklyFailed: "No se pudo guardar el horario semanal.",
+  changedElsewhere:
+    "El horario cambió en otro lugar. Revisa la versión más reciente antes de editar.",
+  title: "Horario escolar",
+  intro: "Guarda una vez los horarios de los períodos de tu escuela.",
+  period: "Período",
+  periodFor: "Período del horario {index}",
+  periodOption: "Período {number}",
+  starts: "Empieza",
+  ends: "Termina",
+  startsLabel: "El período {number} empieza",
+  endsLabel: "El período {number} termina",
+  remove: "Quitar el Período {number}",
+  noBellTimes: "Todavía no hay horarios guardados.",
+  addPeriod: "Agregar período",
+  useClassTimes: "Usar los horarios actuales de las clases",
+  saving: "Guardando…",
+  save: "Guardar horario escolar",
+  savedWithClasses: "Horario escolar y horarios de clases guardados.",
+  saved: "Horario escolar guardado.",
+  saveFailed: "No se pudo guardar el horario.",
+  upToDate: "El horario escolar ya está al día.",
+  reviewTitle: "¿Actualizar las clases existentes?",
+  reviewChanges:
+    "Estas clases tienen horarios distintos al nuevo horario escolar:",
+  className: "Período {number} · {name}",
+  unlinked: {
+    one: "1 clase ya no tiene un horario de timbre guardado. Se conservará su horario actual.",
+    other:
+      "{count} clases ya no tienen un horario de timbre guardado. Se conservarán sus horarios actuales.",
+  },
+  updateAndSave: "Actualizar clases y guardar",
+  keepAndSave: "Conservar horarios de clases y guardar",
+  cancel: "Cancelar",
+  previewLabel: "Vista previa del horario: {day}",
+  noneAssigned: "Sin horario asignado",
+  noClassNow: "No hay clase en este momento",
+  periodRow: "Período {number}",
+  inSession: "En clase",
+  noPeriods: "Ningún período tiene clase en este horario.",
+} satisfies Translation<typeof en>;

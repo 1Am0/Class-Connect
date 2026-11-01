@@ -1,0 +1,234 @@
+/*
+ * Class Connect design tokens — "Bright Classroom".
+ * Every color, size, and motion value in the interface comes from here.
+ */
+:root {
+  color-scheme: light;
+
+  /* Type */
+  --font-sans:
+    "Google Sans Flex Variable", "Google Sans", Roboto, system-ui, sans-serif;
+  --font-display: var(--font-sans);
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 19px;
+  --text-xl: 24px;
+  --text-2xl: 30px;
+  --text-3xl: 37px;
+  --text-4xl: 46px;
+  /* Big numbers: the attendance count, rates, the picked student. */
+  --display-lg: 60px;
+  --display-xl: 76px;
+
+  /* Weights: four, used the same way everywhere. Medium is for display
+     headings, semibold for labels, buttons and small titles, bold for
+     numbers and emphasis. */
+  --weight-regular: 400;
+  --weight-medium: 540;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Type roles */
+  --title-page: var(--text-4xl);
+  --title-section: var(--text-xl);
+  --title-item: var(--text-lg);
+  --text-meta: var(--text-sm);
+  --text-caption: var(--text-xs);
+
+  /* Space (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --action-gap: var(--space-3);
+
+  /* Shape */
+  --radius-small: 6px;
+  --radius-control: 8px;
+  --radius-panel: 16px;
+  --radius-dialog: 24px;
+  --radius-pill: 999px;
+  --control-height: 44px;
+  --control-height-compact: 36px;
+
+  /* Inner padding of cards and dialogs. */
+  --pad-card: var(--space-6);
+  --pad-dialog: var(--space-5);
+
+  /* Layout */
+  --sidebar-width: 248px;
+  --sidebar-collapsed: 72px;
+  --content-max: 1200px;
+  --gutter: var(--space-5);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration: 150ms;
+
+  /* Light base: crisp white surfaces on a cool, faintly tinted canvas. */
+  --base-canvas: #f3f6fb;
+  --surface: #ffffff;
+  --raised: #ffffff;
+  --ink: #1f1f1f;
+  --ink-2: #555a61;
+  --rule: #dadce0;
+  --rule-strong: #b6bbc2;
+  --danger: #b3261e;
+  --danger-tint: #fce8e6;
+  --danger-ink: #ffffff;
+
+  --accent: #137333;
+  --accent-strong: #0d652d;
+  --accent-ink: #ffffff;
+  --accent-text: #0d652d;
+
+  /* Class banners: each class gets one, chosen by period number.
+     All carry white text at 4.5:1 or better. */
+  --class-1: #1967d2;
+  --class-2: #137333;
+  --class-3: #8430ce;
+  --class-4: #c5221f;
+  --class-5: #007b83;
+  --class-6: #b05a00;
+  --class-7: #c2185b;
+  --class-8: #3949ab;
+
+  /* Attendance status — independent of the chosen color theme. */
+  --status-present-bg: #e9f4eb;
+  --status-present-ink: #265b3a;
+  --status-present-border: #bfd9c5;
+  --status-present-solid: #1e8e3e;
+  --status-present-fill: #137333;
+  --status-absent-bg: #fff0ec;
+  --status-absent-ink: #8e402d;
+  --status-absent-border: #e9c7bd;
+  --status-absent-solid: #d93025;
+  --status-absent-fill: #c5221f;
+  --status-late-bg: #fff5d8;
+  --status-late-ink: #70520b;
+  --status-late-border: #e6d4a1;
+  --status-late-solid: #f9ab00;
+  --status-late-fill: #a35a00;
+  --status-excused-bg: #eaf3fb;
+  --status-excused-ink: #315c83;
+  --status-excused-border: #bfd4e9;
+  --status-excused-solid: #1a73e8;
+  --status-excused-fill: #1967d2;
+  --status-on-fill: #ffffff;
+  --bluetooth: #006fd6;
+  --bluetooth-strong: #005bb0;
+
+  /* On colored banners and buttons. */
+  --on-color: #ffffff;
+  --on-color-soft: #ffffff14;
+  --on-color-tint: #ffffff1f;
+  --on-color-strong: #ffffff2e;
+  --on-color-shadow: 0 1px 2px #00000040;
+  /* White buttons on a colored banner. */
+  --on-color-ink: #1f1f1f;
+  --on-color-hover: #f1f3f4;
+  /* Avatar color outside the class and status palettes. */
+  --tone-brown: #795548;
+  /* Behind dialogs and the phone menu. */
+  --scrim: color-mix(in srgb, #0b0d0c 42%, transparent);
+
+  /* Elevation: only floating layers cast shadows. */
+  --shadow-card: 0 1px 2px #3c40434d, 0 1px 3px 1px #3c404326;
+  --shadow-float: 0 1px 3px #3c40434d, 0 4px 8px 3px #3c404326;
+  --shadow-dialog: 0 2px 6px #3c404333, 0 24px 56px -12px #3c404359;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --base-canvas: #131417;
+  --surface: #1e1f22;
+  --raised: #26282c;
+  --ink: #e8eaed;
+  --ink-2: #aab0b8;
+  --rule: #34373c;
+  --rule-strong: #4a4e55;
+  --danger: #f2a197;
+  --danger-tint: #3d2522;
+  --danger-ink: #2a0f0c;
+
+  --accent: #6dd58c;
+  --accent-strong: #8ee0a6;
+  --accent-ink: #0b2614;
+  --accent-text: #7ddb98;
+
+  --class-1: #2d6dc4;
+  --class-2: #1d7a3e;
+  --class-3: #8a45c9;
+  --class-4: #c0392f;
+  --class-5: #0d7d84;
+  --class-6: #a35a0d;
+  --class-7: #b8225f;
+  --class-8: #4a57b0;
+
+  --status-present-bg: #173a25;
+  --status-present-ink: #b9e9c5;
+  --status-present-border: #477655;
+  --status-present-solid: #6dd58c;
+  --status-present-fill: #6dd58c;
+  --status-absent-bg: #4b302a;
+  --status-absent-ink: #f6c5af;
+  --status-absent-border: #8f5d4e;
+  --status-absent-solid: #f28b82;
+  --status-absent-fill: #f2a19a;
+  --status-late-bg: #4b4025;
+  --status-late-ink: #f3d795;
+  --status-late-border: #806b3c;
+  --status-late-solid: #fdd663;
+  --status-late-fill: #fdd663;
+  --status-excused-bg: #2b4050;
+  --status-excused-ink: #bcdcf8;
+  --status-excused-border: #56758b;
+  --status-excused-solid: #8ab4f8;
+  --status-excused-fill: #a8c7fa;
+  --status-on-fill: #131417;
+  --bluetooth: #006fd6;
+  --bluetooth-strong: #005bb0;
+
+  --shadow-card: 0 1px 2px #0000004d, 0 1px 3px 1px #00000026;
+  --shadow-float: 0 1px 2px #00000066, 0 14px 36px -12px #000000b3;
+  --shadow-dialog: 0 2px 8px #00000066, 0 36px 80px -24px #000000d9;
+}
+
+/* Derived tones follow the accent and the active theme. */
+:root {
+  /* Settings sections and Help topics each take one of these. */
+  --section-1: var(--class-3);
+  --section-2: var(--class-2);
+  --section-3: var(--class-1);
+  --section-4: var(--class-6);
+  --section-5: var(--class-4);
+  --section-6: var(--class-5);
+  --section-7: var(--class-7);
+  --canvas: color-mix(in srgb, var(--accent) 3%, var(--base-canvas));
+  --accent-tint: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  --accent-tint-strong: color-mix(in srgb, var(--accent) 20%, var(--surface));
+  --wash: color-mix(in srgb, var(--ink) 4%, var(--surface));
+  --hover: color-mix(in srgb, var(--ink) 5%, transparent);
+  --press: color-mix(in srgb, var(--ink) 9%, transparent);
+  --focus: var(--accent);
+  /* Each page's color (the class's on class pages) is set on <main>. */
+  --page-color: var(--accent-banner);
+  /* The accent as a banner behind white text. */
+  --accent-banner: var(--accent);
+}
+html[data-theme="dark"] {
+  --accent-banner: color-mix(in srgb, var(--accent) 45%, #000);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --pad-card: var(--space-4);
+    --title-page: var(--text-2xl);
+  }
+}

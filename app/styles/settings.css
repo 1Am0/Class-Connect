@@ -1,0 +1,427 @@
+/* Settings: section index on the left, working panels on the right. */
+.settings-stack {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+}
+.settings-navigation {
+  position: sticky;
+  top: 88px;
+  display: grid;
+  gap: 2px;
+}
+/* Each section has its own color: the nav icon, and a band on its cards. */
+.settings-appearance {
+  --section-color: var(--section-1);
+}
+.settings-classroom {
+  --section-color: var(--section-3);
+}
+.settings-attendance {
+  --section-color: var(--section-2);
+}
+.settings-data {
+  --section-color: var(--section-5);
+}
+.settings-nav-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--section-color) 14%, var(--surface));
+  color: color-mix(in srgb, var(--section-color) 80%, var(--ink));
+}
+.settings-nav-button[aria-pressed="true"] .settings-nav-icon {
+  background: var(--section-color);
+  color: var(--on-color);
+}
+.settings-section .settings-card {
+  border-top: 4px solid var(--section-color);
+}
+.settings-section .settings-card > .card-title h2 {
+  color: color-mix(in srgb, var(--section-color) 70%, var(--ink));
+}
+.settings-nav-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--control-height);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--ink-2);
+  font-weight: var(--weight-medium);
+  text-align: left;
+}
+.settings-nav-button:hover {
+  background: var(--hover);
+  color: var(--ink);
+}
+.settings-nav-button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--section-color) 14%, var(--surface));
+  color: color-mix(in srgb, var(--section-color) 75%, var(--ink));
+  font-weight: var(--weight-bold);
+}
+.settings-section {
+  display: grid;
+  gap: var(--space-5);
+  min-width: 0;
+}
+.settings-card {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--pad-card);
+}
+.settings-card > .card-title h2 {
+  font-size: var(--title-section);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])
+    .settings-section
+    .settings-card
+    > .card-title
+    h2 {
+    color: color-mix(in srgb, var(--section-color) 45%, var(--ink));
+  }
+}
+:root[data-theme="dark"] .settings-section .settings-card > .card-title h2 {
+  color: color-mix(in srgb, var(--section-color) 45%, var(--ink));
+}
+.settings-controls {
+  display: grid;
+}
+.settings-controls > :not(button) {
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--rule);
+}
+.settings-controls > :first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.settings-controls > :last-child {
+  padding-bottom: 0;
+}
+
+/* Theme: three equal choices. */
+.segmented-setting {
+  display: grid;
+  gap: var(--space-2);
+}
+.segmented-setting .segmented {
+  display: grid;
+  max-width: 420px;
+}
+.segmented-setting legend {
+  margin-bottom: var(--space-2);
+  font-weight: var(--weight-semibold);
+}
+
+/* Switch rows, sliders, and labeled settings. */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  font-size: var(--text-base);
+  cursor: pointer;
+}
+.setting-row > span,
+.picker-setting > div:first-child {
+  display: grid;
+  gap: 2px;
+}
+:is(.setting-row, .picker-setting) small {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+}
+.picker-setting {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+}
+.picker-control .custom-select-trigger {
+  min-width: 240px;
+}
+/* Timezone, account, and notes. */
+.timezone-setting {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 480px;
+}
+.timezone-field .custom-select-trigger {
+  width: 100%;
+}
+.settings-card .form-stack > button {
+  justify-self: start;
+}
+.account-settings input[readonly] {
+  background: transparent;
+  color: var(--ink-2);
+}
+.account-divider {
+  height: 1px;
+  background: var(--rule);
+}
+.account-reset-link {
+  justify-self: start;
+}
+.password-field {
+  display: grid;
+  gap: var(--space-2);
+}
+.password-input-wrap {
+  position: relative;
+  display: block;
+}
+.password-input-wrap input {
+  padding-right: 52px;
+}
+.password-visibility {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 40px;
+  border-radius: var(--radius-small);
+  color: var(--ink-2);
+  transform: translateY(-50%);
+}
+.password-visibility:hover {
+  background: var(--hover);
+  color: var(--ink);
+}
+.password-requirements {
+  display: grid;
+  gap: var(--space-1);
+  list-style: none;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+}
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.password-requirements li.met {
+  color: var(--status-present-ink);
+}
+
+/* Student data actions. */
+.student-data-note {
+  color: var(--ink-2);
+}
+.data-actions > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.data-actions p {
+  flex: 1 1 280px;
+}
+
+/* Weekly and legacy school schedules. */
+.schedule-editor-disclosure > summary {
+  min-height: 56px;
+  font-size: var(--text-lg);
+}
+.schedule-editor-disclosure > .hint {
+  padding: 0 var(--space-4) var(--space-3);
+}
+.schedule-editor-disclosure[open] > :not(summary, .hint) {
+  margin: 0 var(--space-4) var(--space-4);
+}
+.school-schedule-card {
+  padding: var(--space-5);
+}
+.school-schedule-content {
+  display: grid;
+  gap: var(--space-4);
+}
+.weekly-schedule-days {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+}
+.weekly-schedule-days .custom-select-trigger,
+.weekly-schedule-toolbar .custom-select-trigger,
+.weekly-schedule-preview .custom-select-trigger {
+  width: 100%;
+}
+.weekly-schedule-toolbar,
+.weekly-schedule-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.weekly-schedule-toolbar > label,
+.weekly-schedule-name-row > label {
+  flex: 1 1 240px;
+}
+.weekly-schedule-editor {
+  display: grid;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+.bell-period-list {
+  display: grid;
+}
+.bell-period-row {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.8fr) repeat(2, minmax(140px, 1fr)) 44px;
+  align-items: end;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--rule);
+}
+.bell-remove {
+  justify-self: end;
+}
+.weekly-schedule-actions,
+.school-schedule-actions,
+.bell-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--action-gap);
+}
+.weekly-schedule-preview {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-panel);
+  background: var(--raised);
+}
+.schedule-preview {
+  display: grid;
+  gap: var(--space-2);
+}
+.schedule-preview-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.schedule-preview-heading span {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.schedule-preview-list {
+  display: grid;
+}
+.schedule-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+.schedule-preview-row.is-current {
+  margin-inline: calc(-1 * var(--space-2));
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-small);
+  background: var(--accent-tint);
+}
+.schedule-preview-row strong {
+  color: var(--accent-text);
+}
+.bell-review {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* Side-by-side editor and preview only when the card itself has room. */
+.weekly-schedule-card {
+  container-type: inline-size;
+}
+@container (min-width: 820px) {
+  .weekly-schedule-card .school-schedule-content:has(.weekly-schedule-editor) {
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    align-items: start;
+  }
+  .weekly-schedule-card
+    .school-schedule-content:has(.weekly-schedule-editor)
+    > * {
+    grid-column: 1 / -1;
+  }
+  .weekly-schedule-card
+    .school-schedule-content:has(.weekly-schedule-editor)
+    > .weekly-schedule-editor {
+    grid-column: 1;
+  }
+  .weekly-schedule-card
+    .school-schedule-content:has(.weekly-schedule-editor)
+    > .weekly-schedule-preview {
+    grid-column: 2;
+    grid-row: span 2;
+  }
+}
+@media (max-width: 1100px) {
+  .settings-stack {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+  .settings-navigation {
+    position: static;
+    display: flex;
+    gap: var(--space-5);
+    overflow-x: auto;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .settings-nav-button {
+    flex: none;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 0;
+    white-space: nowrap;
+  }
+  .settings-nav-button:hover,
+  .settings-nav-button[aria-pressed="true"] {
+    background: transparent;
+  }
+  .settings-nav-button[aria-pressed="true"]::before {
+    content: "";
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    width: auto;
+    height: 3px;
+    border-radius: var(--radius-small) var(--radius-small) 0 0;
+    background: var(--accent);
+  }
+}
+@media (max-width: 720px) {
+  .settings-navigation {
+    margin-inline: calc(-1 * var(--space-4));
+    padding-inline: var(--space-4);
+  }
+  .picker-control,
+  .picker-control .custom-select-trigger {
+    width: 100%;
+    min-width: 0;
+  }
+  .bell-period-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) 44px;
+  }
+  .bell-period-row > label:first-child {
+    grid-column: 1 / -1;
+  }
+}

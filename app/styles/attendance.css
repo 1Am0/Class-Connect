@@ -1,0 +1,663 @@
+/* Attendance roster, history corrections, and roster import. */
+/* clip, not hidden, so the selection bar can stay stuck while scrolling. */
+.attendance-card {
+  overflow: clip;
+}
+
+/* Overview: the count teachers look for first. */
+.attendance-overview {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--pad-card);
+  border-bottom: 1px solid var(--rule);
+}
+.attendance-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: end;
+  gap: var(--space-6);
+}
+.attendance-hero .big-count strong {
+  font-size: var(--display-xl);
+}
+.attendance-hero-detail {
+  display: grid;
+  gap: var(--space-3);
+  padding-bottom: var(--space-2);
+}
+.attendance-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  list-style: none;
+}
+.attendance-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.attendance-stat strong {
+  color: var(--ink);
+  font-size: var(--text-base);
+  font-variant-numeric: tabular-nums;
+}
+.attendance-stat-key {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-small);
+}
+.attendance-stat.present .attendance-stat-key {
+  background: var(--status-present-solid);
+}
+.attendance-stat.late .attendance-stat-key {
+  background: var(--status-late-solid);
+}
+.attendance-stat.excused .attendance-stat-key {
+  background: var(--status-excused-solid);
+}
+.attendance-stat.absent .attendance-stat-key {
+  background: color-mix(in srgb, var(--status-absent-solid) 55%, var(--rule));
+}
+.latest-checkin {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--accent-tint);
+  font-size: var(--text-sm);
+}
+.latest-checkin > svg {
+  color: var(--accent-text);
+}
+.latest-checkin time {
+  margin-left: var(--space-2);
+  color: var(--ink-2);
+}
+.attendance-setup-note {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.attendance-message {
+  margin: var(--space-4) var(--pad-card) 0;
+}
+
+/* History correction strip. */
+.history-correction {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  padding: var(--space-5) var(--pad-card);
+  border-bottom: 1px solid var(--rule);
+  background: var(--accent-tint);
+}
+.history-correction > div {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+/* Toolbar. */
+.table-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--pad-card);
+}
+.search-box {
+  position: relative;
+  flex: 1 1 260px;
+}
+.search-box > svg {
+  position: absolute;
+  top: 50%;
+  left: var(--space-3);
+  color: var(--ink-2);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.search-box input {
+  padding-left: 40px;
+}
+.table-control-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.bulk-attendance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: 0 var(--pad-card) var(--space-4);
+}
+/* While selecting, the bulk actions follow the teacher down long rosters. */
+.bulk-attendance.selecting {
+  position: sticky;
+  top: var(--space-3);
+  z-index: 20;
+  margin: 0 var(--space-4) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--page-color) 35%, transparent);
+  border-radius: var(--radius-control);
+  background: var(--page-tint);
+  box-shadow: var(--shadow-float);
+}
+.bulk-attendance .hint {
+  flex-basis: 100%;
+}
+
+/* Roster ---------------------------------------------------------------- */
+.simple-roster {
+  /* Auto layout lets the edit column fit its buttons in every language. */
+  table-layout: auto;
+}
+.simple-roster th {
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--rule);
+  border-bottom: 2px solid var(--page-ink);
+  background: var(--page-tint);
+}
+.simple-roster th:first-child,
+.simple-roster td:first-child {
+  padding-left: var(--pad-card);
+}
+.simple-roster th:last-child,
+.simple-roster td:last-child {
+  padding-right: var(--pad-card);
+}
+.simple-roster th:nth-child(2) {
+  width: 360px;
+}
+.simple-roster .checkin-column {
+  width: 168px;
+}
+.simple-roster .checkin-column small {
+  white-space: nowrap;
+}
+.simple-roster .edit-column {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+.simple-roster td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+.simple-roster tbody tr {
+  transition: background-color 600ms var(--ease);
+}
+/* A colored edge marks who is here: present, late, or excused. */
+.simple-roster
+  tbody
+  tr:is(.status-present, .status-late, .status-excused)
+  > td:first-child {
+  box-shadow: inset 4px 0 0 var(--row-status);
+}
+.simple-roster tbody tr.status-present {
+  --row-status: var(--status-present-solid);
+}
+.simple-roster tbody tr.status-late {
+  --row-status: var(--status-late-solid);
+}
+.simple-roster tbody tr.status-excused {
+  --row-status: var(--status-excused-solid);
+}
+.simple-roster tbody tr:hover {
+  background: color-mix(in srgb, var(--ink) 2%, transparent);
+}
+.simple-roster tbody tr.just-arrived {
+  animation: arrived 1.6s var(--ease);
+}
+@keyframes arrived {
+  0%,
+  35% {
+    background: var(--accent-tint-strong);
+  }
+}
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: 52px;
+}
+.student-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  min-width: 0;
+  font-weight: var(--weight-semibold);
+  overflow-wrap: anywhere;
+}
+/* Desktop summarizes missing school IDs once; phones keep the row hint. */
+@media (min-width: 721px) {
+  .student-name .qr-setup-tag {
+    display: none;
+  }
+}
+.row-select {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+}
+.time-cell {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.saving-status {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+}
+.roster-empty {
+  border-top: 1px solid var(--rule);
+}
+.roster-empty + .table-footer {
+  display: none;
+}
+.table-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--pad-card);
+  border-top: 1px solid var(--rule);
+  background: var(--page-tint);
+  border-radius: 0 0 var(--radius-panel) var(--radius-panel);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+/* Today's totals, repeated at the end of the roster in status colors. */
+.footer-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* One-tap status control: letter always, word when there is room. */
+.status-toggle {
+  display: inline-grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  width: 100%;
+  max-width: 340px;
+  padding: 2px;
+  border: 1px solid var(--rule-strong);
+  border-radius: calc(var(--radius-control) + 2px);
+  background: var(--raised);
+  position: relative;
+  isolation: isolate;
+}
+/* The sliding highlight: a quarter of the control, moved to the status. */
+.status-thumb {
+  position: absolute;
+  z-index: -1;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc((100% - 10px) / 4);
+  border-radius: var(--radius-control);
+  transform: translateX(calc(var(--index) * (100% + 2px)));
+  transition:
+    transform 240ms var(--ease),
+    background-color 240ms var(--ease),
+    box-shadow 240ms var(--ease);
+}
+.status-thumb.present {
+  background: var(--status-present-fill);
+}
+/* Absent is everyone's starting point, so it stays a calm tint. */
+.status-thumb.absent {
+  background: var(--status-absent-bg);
+  box-shadow: inset 0 0 0 1px var(--status-absent-border);
+}
+.status-thumb.late {
+  background: var(--status-late-fill);
+}
+.status-thumb.excused {
+  background: var(--status-excused-fill);
+}
+.status-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-control);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  transition:
+    background-color var(--duration) var(--ease),
+    color 240ms var(--ease);
+}
+.status-option:hover:not(:disabled, [aria-pressed="true"]) {
+  background: var(--hover);
+  color: var(--ink);
+}
+.status-option-letter {
+  display: none;
+}
+.status-option[aria-pressed="true"] {
+  color: var(--status-on-fill);
+}
+.status-option.absent[aria-pressed="true"] {
+  color: var(--status-absent-ink);
+}
+.status-option:focus-visible {
+  outline-offset: 0;
+}
+
+/* Roster import dialog -------------------------------------------------- */
+.roster-import-body {
+  display: grid;
+  gap: var(--space-4);
+}
+.roster-import-context {
+  color: var(--ink-2);
+  font-size: var(--text-meta);
+}
+.roster-field,
+.roster-file {
+  display: grid;
+  gap: var(--space-2);
+}
+.roster-check,
+.roster-mode label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--weight-medium);
+}
+.roster-mode {
+  display: grid;
+  gap: var(--space-2);
+}
+.roster-mode legend {
+  margin-bottom: var(--space-2);
+  font-weight: var(--weight-semibold);
+}
+.roster-map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+}
+.roster-summary {
+  font-weight: var(--weight-semibold);
+}
+.roster-preview-scroll {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+.roster-preview th,
+.roster-preview td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--text-sm);
+}
+.roster-preview th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+}
+.roster-review,
+.roster-removals {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+}
+.roster-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--action-gap);
+  padding-top: var(--space-2);
+}
+
+/* Narrow screens: rows become compact cards. ---------------------------- */
+@media (max-width: 380px) {
+  .status-option-label {
+    display: none;
+  }
+  .status-option-letter {
+    display: inline;
+    font-size: var(--text-base);
+  }
+}
+/* Tablets and phones: rows become compact cards (name, time / status, Edit). */
+@media (max-width: 1100px) {
+  .simple-roster,
+  .simple-roster tbody {
+    display: block;
+  }
+  .simple-roster tbody {
+    border-top: 1px solid var(--rule);
+  }
+  .simple-roster thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .simple-roster tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-2) var(--space-3);
+    padding: var(--space-3) var(--pad-card);
+    border-bottom: 1px solid var(--rule);
+  }
+  .simple-roster tbody tr:is(.status-present, .status-late, .status-excused) {
+    box-shadow: inset 4px 0 0 var(--row-status);
+  }
+  .simple-roster
+    tbody
+    tr:is(.status-present, .status-late, .status-excused)
+    > td:first-child {
+    box-shadow: none;
+  }
+  .simple-roster td,
+  .simple-roster td:first-child,
+  .simple-roster td:last-child {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .simple-roster td:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .simple-roster .checkin-column {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    width: auto;
+  }
+  .simple-roster .checkin-column::before {
+    content: attr(data-prefix) " ";
+  }
+  .simple-roster .status-column {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .simple-roster .edit-column {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    width: auto;
+  }
+  .simple-roster .edit-column:empty {
+    display: none;
+  }
+  .student-cell {
+    min-height: 0;
+  }
+  .status-toggle {
+    max-width: 420px;
+  }
+  .status-option {
+    min-height: 44px;
+  }
+}
+@media (max-width: 720px) {
+  .attendance-overview,
+  .table-controls,
+  .history-correction {
+    padding: var(--space-4);
+  }
+  .attendance-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+  .attendance-hero .big-count strong {
+    font-size: var(--display-lg);
+  }
+  .bulk-attendance {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+  .attendance-message {
+    margin: var(--space-3) var(--space-4) 0;
+  }
+  .table-control-actions {
+    width: 100%;
+  }
+  .table-control-actions > * {
+    flex: 1 1 auto;
+  }
+  .table-footer {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+@media (max-width: 720px) {
+  /* Clear the phone's sticky top bar. */
+  .bulk-attendance.selecting {
+    top: calc(64px + var(--space-2));
+    margin-inline: var(--space-3);
+  }
+  .bulk-attendance.selecting .hint {
+    display: none;
+  }
+}
+@media (max-width: 720px) {
+  .status-toggle {
+    max-width: none;
+  }
+  /* Phones: Edit sits beside the check-in time so the status buttons get
+     the whole row, which keeps longer labels ("Justificado") readable. */
+  .simple-roster tbody tr {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    padding-inline: var(--space-4);
+  }
+  .simple-roster .status-column {
+    grid-column: 1 / -1;
+  }
+  .simple-roster .edit-column {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+/* Queued (not yet synced) status: shown on the button itself, never as an
+   extra line that pushes the roster down. */
+.status-pending .status-thumb {
+  animation: status-pending 1.2s ease-in-out infinite alternate;
+}
+@keyframes status-pending {
+  to {
+    opacity: 0.55;
+  }
+}
+
+/* Notes use the page color, not a status color, so they never read as a mark. */
+/* Attendance notes (Settings → Attendance) ------------------------------ */
+.note-button {
+  margin-right: var(--space-2);
+  vertical-align: middle;
+  color: var(--ink-2);
+}
+.note-button.has-note {
+  background: var(--page-tint);
+  color: var(--page-ink);
+}
+.attendance-note {
+  max-width: 100%;
+}
+.attendance-note:disabled {
+  cursor: default;
+  opacity: 1;
+}
+.attendance-note svg {
+  flex: none;
+}
+.note-modal {
+  width: min(520px, calc(100vw - 32px));
+}
+.note-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Keyboard shortcuts (Settings → Attendance) ---------------------------- */
+.shortcut-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin: 0 var(--pad-card) var(--space-3);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.shortcut-hint > span:first-child {
+  font-weight: var(--weight-bold);
+  color: var(--page-ink);
+}
+.shortcut-hint kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  margin-right: 2px;
+  padding: 0 var(--space-1);
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  color: var(--ink);
+  font: var(--weight-semibold) var(--text-caption) / 1 var(--font-sans);
+}
+.simple-roster tr.keyboard-current > td {
+  background: var(--page-tint);
+}
+.simple-roster tr.keyboard-current > td:first-child {
+  box-shadow: inset 4px 0 0 var(--page-color);
+}
+.simple-roster tr:focus {
+  outline: none;
+}
+@media (max-width: 720px) {
+  .shortcut-hint {
+    display: none;
+  }
+}

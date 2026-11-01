@@ -1,0 +1,68 @@
+import type { Namespace } from "../translate";
+
+// Bell schedules and their previews.
+export default {
+  weeklyTitle: "Weekly school schedule",
+  weeklyIntro: "Choose which bell schedule runs on each school day.",
+  assignments: "Weekday schedule assignments",
+  daySchedule: "{day} schedule",
+  noSchedule: "No schedule",
+  noScheduleHint:
+    "A day with no schedule pauses automatic scanner routing. You can still select a scanner class manually.",
+  scheduleToEdit: "Schedule to edit",
+  newSchedule: "New schedule",
+  copyName: "{name} copy",
+  duplicate: "Duplicate",
+  scheduleName: "Schedule name",
+  deleteSchedule: "Delete schedule",
+  usedOn: "Used on {days}. Editing this schedule changes every assigned day.",
+  notAssigned: "Not assigned to a weekday yet.",
+  periodForTime: "Period for time {index}",
+  overlapNote:
+    "{warnings} Automatic scanner routing chooses the lowest period number.",
+  createFirst:
+    "Create a schedule, add its period times, then assign it to weekdays.",
+  previewDay: "Preview weekday",
+  saveWeekly: "Save weekly schedule",
+  weeklySaved: "Weekly schedule saved.",
+  weeklyFailed: "Could not save the weekly schedule.",
+  changedElsewhere:
+    "The schedule changed elsewhere. Review the latest version before editing.",
+  title: "School schedule",
+  intro: "Save your school’s period times once.",
+  period: "Period",
+  periodFor: "Period for bell time {index}",
+  periodOption: "Period {number}",
+  starts: "Starts",
+  ends: "Ends",
+  startsLabel: "Period {number} starts",
+  endsLabel: "Period {number} ends",
+  remove: "Remove Period {number}",
+  noBellTimes: "No bell times saved yet.",
+  addPeriod: "Add period",
+  useClassTimes: "Use current class times",
+  saving: "Saving…",
+  save: "Save school schedule",
+  savedWithClasses: "School schedule and class times saved.",
+  saved: "School schedule saved.",
+  saveFailed: "Could not save the schedule.",
+  upToDate: "School schedule is already up to date.",
+  reviewTitle: "Update existing classes?",
+  reviewChanges:
+    "These classes have times that differ from the new school schedule:",
+  className: "Period {number} · {name}",
+  unlinked: {
+    one: "1 class no longer has a saved bell time. Its current time will be kept.",
+    other:
+      "{count} classes no longer have a saved bell time. Their current times will be kept.",
+  },
+  updateAndSave: "Update classes and save",
+  keepAndSave: "Keep class times and save",
+  cancel: "Cancel",
+  previewLabel: "{day} schedule preview",
+  noneAssigned: "No schedule assigned",
+  noClassNow: "No class in session",
+  periodRow: "Period {number}",
+  inSession: "In session",
+  noPeriods: "No periods meet on this schedule.",
+} satisfies Namespace;
