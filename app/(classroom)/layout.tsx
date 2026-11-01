@@ -12,7 +12,9 @@ import { readChoices } from "@/lib/class-banners";
 import { getT } from "@/lib/i18n/server";
 
 // Loading is read-only, so one retry is safe. The first request after
-// sign-in (or after the server sat idle) can hit a dropped connection.
+// sign-in (or after the server sat idle) can hit a dropped connection, and
+// Supabase can briefly reject a token as "issued at future" (PGRST303) while
+// its clocks catch up, so wait a moment before trying again.
 async function loadClassroom() {
   try {
     return await (await teacherStore()).snapshot();
@@ -20,6 +22,7 @@ async function loadClassroom() {
     unstable_rethrow(error);
     if (error instanceof HttpError) throw error;
     console.warn("Retrying classroom load after:", error);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return (await teacherStore()).snapshot();
   }
 }
