@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   activePeriod,
+  autoSessionPeriod,
   normalizeUid,
   schoolClock,
   makeGroups,
@@ -67,6 +68,22 @@ test("automatic schedule includes start, excludes end and gaps", () => {
     3,
   );
 });
+test("a manual destination never opens a session on a day its class does not meet", () => {
+  const s = demoSeed();
+  s.teacher.override_period_id = s.periods[1].id;
+  // Sunday 2026-09-13 and Monday 2026-09-14, 9 pm Los Angeles time.
+  const sunday = new Date("2026-09-14T04:00:00Z");
+  const monday = new Date("2026-09-15T04:00:00Z");
+  assert.equal(activePeriod(s.teacher, s.periods, sunday)?.id, s.periods[1].id);
+  assert.equal(autoSessionPeriod(s.teacher, s.periods, sunday), undefined);
+  assert.equal(
+    autoSessionPeriod(s.teacher, s.periods, monday)?.id,
+    s.periods[1].id,
+  );
+  s.teacher.override_period_id = null;
+  assert.equal(autoSessionPeriod(s.teacher, s.periods, sunday), undefined);
+});
+
 test("manual override wins and inactive override never receives scans", () => {
   const { s } = fixture();
   s.teacher.override_period_id = s.periods[1].id;

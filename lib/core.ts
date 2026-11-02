@@ -40,6 +40,21 @@ export function activePeriod(
       );
     });
 }
+/**
+ * The class whose attendance session is opened automatically when the
+ * classroom loads. A manual scanner destination counts at any hour, but only
+ * on days the class meets, so weekends and days off are never recorded as
+ * everyone absent. Real scans and marks still open a session on any day.
+ */
+export function autoSessionPeriod(
+  teacher: Teacher,
+  periods: Period[],
+  now = new Date(),
+) {
+  const period = activePeriod(teacher, periods, now);
+  const { date } = schoolClock(teacher.timezone, now);
+  return period && effectiveTimeFor(teacher, period, date) ? period : undefined;
+}
 export function rosterFor(s: Snapshot, periodId: string) {
   const ids = new Set(
     s.period_students

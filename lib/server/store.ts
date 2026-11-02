@@ -17,7 +17,7 @@ import type { RelayStore } from "./bluetooth";
 import { admin } from "./supabase";
 import { demoTransaction } from "./demo";
 import { isDemo, simulatorEnabled } from "./config";
-import { activePeriod, rosterFor, schoolClock } from "../core";
+import { autoSessionPeriod, rosterFor, schoolClock } from "../core";
 import { ensureDemoSession } from "./demo-session";
 import { bellTimeFor } from "../bell-schedule";
 import { weeklyScheduleError } from "../weekly-schedule";
@@ -103,7 +103,7 @@ export class Store implements RelayStore {
   async snapshot(): Promise<Snapshot> {
     if (isDemo())
       return demoTransaction((s) => {
-        const p = activePeriod(s.teacher, s.periods);
+        const p = autoSessionPeriod(s.teacher, s.periods);
         if (p && rosterFor(s, p.id).length)
           ensureDemoSession(
             s,
@@ -149,7 +149,7 @@ export class Store implements RelayStore {
       demo: false,
       simulator: simulatorEnabled(),
     } as Snapshot;
-    const p = activePeriod(s.teacher, s.periods),
+    const p = autoSessionPeriod(s.teacher, s.periods),
       date = schoolClock(s.teacher.timezone).date;
     if (
       p &&
